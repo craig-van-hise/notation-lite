@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NotationLite</title>
+  </head>
+  <body>
+    <div id="app" class="p-4">
+      <h1 class="text-2xl font-bold mb-4">NotationLite</h1>
+      <div id="controls" class="mb-4 space-x-2">
+        <input type="file" id="file-input" accept=".mei,.musicxml,.xml" class="border p-1" />
+      </div>
+      <div id="notation" class="border p-4 min-h-[400px]"></div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

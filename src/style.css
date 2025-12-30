@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+.selected {
+  fill: #FFA500 !important;
+  stroke: #FFA500 !important;
+  color: #FFA500 !important;
+}
+
+g.note.selected path {
+  fill: #FFA500 !important;
+  stroke: #FFA500 !important;
+}
