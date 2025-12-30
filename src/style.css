@@ -13,3 +13,11 @@ g.note.selected path {
   fill: #FFA500 !important;
   stroke: #FFA500 !important;
 }
+
+/* Horizontal scroll container */
+#notation {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  max-height: 100vh;
+}

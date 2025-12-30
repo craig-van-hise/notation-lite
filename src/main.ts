@@ -113,13 +113,51 @@ document.addEventListener('keydown', async (e) => {
 
   if (e.key === 'ArrowUp') {
     e.preventDefault();
-    // TODO: Optimistic pitch shift?
-    scoreManager.mutatePitch(selectedId, 1);
-    render();
+
+    // Optimistic UI: Visually move up immediately
+    // A single staff step is roughly 1/8th of a space? 
+    // Verovio usually scales everything. 
+    // Let's approximate: 25px per 50 scale?
+    // We'll just translate Y by -5px as an immediate visual cue
+    // This is tricky because "Up" means lower Y value in SVG.
+
+    const el = document.getElementById(selectedId);
+    if (el) {
+      console.log("Optimistic update on:", selectedId);
+      // Use CSS transform instead of SVG attribute for better browser support
+      el.style.transform = 'translateY(-10px)';
+      el.getBoundingClientRect();
+    } else {
+      console.warn("Optimistic update failed: Element not found", selectedId);
+    }
+
+    // Defer heavy lift
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        scoreManager.mutatePitch(selectedId!, 1);
+        render();
+      }, 50);
+    });
+
   } else if (e.key === 'ArrowDown') {
     e.preventDefault();
-    scoreManager.mutatePitch(selectedId, -1);
-    render();
+
+    const el = document.getElementById(selectedId);
+    if (el) {
+      console.log("Optimistic update on:", selectedId);
+      el.style.transform = 'translateY(10px)';
+      el.getBoundingClientRect();
+    } else {
+      console.warn("Optimistic update failed: Element not found", selectedId);
+    }
+
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        scoreManager.mutatePitch(selectedId!, -1);
+        render();
+      }, 50);
+    });
+
   } else if (e.key === 'Delete' || e.key === 'Backspace') {
     e.preventDefault();
 
